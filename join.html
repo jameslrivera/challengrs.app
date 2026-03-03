@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Join Challenge — Challengrs</title>
+  <meta name="description" content="You've been invited to a challenge on Challengrs. Stake real money, prove yourself daily, and win.">
+
+  <!-- Open Graph for link previews in iMessage / social -->
+  <meta property="og:title" content="You've been challenged!">
+  <meta property="og:description" content="Someone invited you to a challenge on Challengrs. Stake real money, prove yourself daily, and win.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://challengrs.app">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #000;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      text-align: center;
+    }
+    .logo {
+      font-size: 64px;
+      margin-bottom: 16px;
+    }
+    h1 {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .accent { color: #FF6B00; }
+    .subtitle {
+      color: #888;
+      font-size: 16px;
+      margin-bottom: 32px;
+      max-width: 320px;
+      line-height: 1.5;
+    }
+    .btn {
+      display: inline-block;
+      background: #FF6B00;
+      color: #000;
+      font-size: 17px;
+      font-weight: 700;
+      padding: 14px 32px;
+      border-radius: 12px;
+      text-decoration: none;
+      margin-bottom: 16px;
+      transition: opacity 0.2s;
+    }
+    .btn:hover { opacity: 0.85; }
+    .btn-outline {
+      display: inline-block;
+      border: 1px solid #333;
+      color: #888;
+      font-size: 14px;
+      padding: 10px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+    }
+    .btn-outline:hover { border-color: #FF6B00; color: #FF6B00; }
+    .footer {
+      position: fixed;
+      bottom: 24px;
+      color: #444;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="logo">🔥</div>
+  <h1>You've been <span class="accent">challenged</span></h1>
+  <p class="subtitle">
+    Someone invited you to prove yourself on Challengrs.
+    Stake real money, upload daily proof, and win the pot.
+  </p>
+
+  <!-- This link will open the app via Universal Links if installed -->
+  <a id="open-app" class="btn" href="#">Open in Challengrs</a>
+  <br>
+  <a id="app-store" class="btn-outline" href="https://apps.apple.com/app/challengrs/id0000000000">
+    Download on the App Store
+  </a>
+
+  <div class="footer">challengrs.app</div>
+
+  <script>
+    const pathParts = window.location.pathname.split('/');
+    const challengeId = pathParts[pathParts.length - 1];
+
+    const openBtn = document.getElementById('open-app');
+    openBtn.href = window.location.href;
+  </script>
+</body>
+</html>
