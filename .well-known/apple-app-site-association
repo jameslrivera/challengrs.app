@@ -1,0 +1,11 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "XPHBL8575L.challengrs.challengrs",
+        "paths": ["/join/*"]
+      }
+    ]
+  }
+}
