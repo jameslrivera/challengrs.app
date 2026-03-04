@@ -1,737 +1,278 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Challengrs — Stake Money. Prove It Daily. Win the Pot.</title>
-    <meta name="description" content="Challengrs is a mobile app where you stake real money on personal challenges with friends. Complete daily goals, upload photo proof, and win the pot.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        *, *::before, *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Challengrs — Are You Up For The Challenge?</title>
+  <meta name="description" content="Stake real money on personal challenges. Prove yourself daily with photo proof. Win the pot or lose your stake.">
 
-        :root {
-            --bg: #0A0A0A;
-            --bg-card: #0F0F0F;
-            --border: #1A1A1A;
-            --border-hover: #2A2A2A;
-            --text: #F5F5F5;
-            --text-muted: #888888;
-            --accent: #FF7326;
-            --accent-glow: rgba(255, 115, 38, 0.15);
-            --accent-glow-strong: rgba(255, 115, 38, 0.3);
-        }
+  <meta property="og:title" content="Challengrs — Are You Up For The Challenge?">
+  <meta property="og:description" content="Stake real money on personal challenges. Prove yourself daily. Win the pot.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://challengrs.app">
 
-        html {
-            scroll-behavior: smooth;
-        }
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        body {
-            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-        }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #0A0A0A;
+      color: #fff;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
 
-        /* Subtle grain overlay */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-            pointer-events: none;
-            z-index: 9999;
-        }
+    /* Hero */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 24px 48px;
+      min-height: 70vh;
+    }
+    .logo {
+      width: 100px;
+      height: 100px;
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-size: 42px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 8px;
+    }
+    .accent { color: #FF7326; }
+    .tagline {
+      font-size: 18px;
+      color: #888;
+      margin-bottom: 40px;
+      max-width: 440px;
+      line-height: 1.6;
+    }
+    .cta-row { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+    .btn {
+      display: inline-block;
+      background: #FF7326;
+      color: #000;
+      font-size: 17px;
+      font-weight: 700;
+      padding: 14px 36px;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .btn:hover { opacity: 0.85; }
+    .btn-outline {
+      display: inline-block;
+      border: 1px solid #333;
+      color: #999;
+      font-size: 15px;
+      font-weight: 600;
+      padding: 14px 28px;
+      border-radius: 12px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-outline:hover { border-color: #FF7326; color: #FF7326; }
 
-        /* Glow orb background */
-        .glow-orb {
-            position: fixed;
-            width: 600px;
-            height: 600px;
-            border-radius: 50%;
-            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
-            pointer-events: none;
-            z-index: 0;
-        }
-        .glow-orb-1 {
-            top: -200px;
-            right: -200px;
-            opacity: 0.5;
-        }
-        .glow-orb-2 {
-            bottom: 20%;
-            left: -300px;
-            opacity: 0.3;
-            width: 500px;
-            height: 500px;
-        }
+    /* Stats */
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      padding: 48px 24px;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .stat {
+      text-align: center;
+    }
+    .stat-number {
+      font-size: 36px;
+      font-weight: 800;
+      color: #FF7326;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -1px;
+    }
+    .stat-label {
+      font-size: 13px;
+      color: #666;
+      margin-top: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
 
-        .container {
-            max-width: 1080px;
-            margin: 0 auto;
-            padding: 0 24px;
-            position: relative;
-            z-index: 1;
-        }
+    /* How It Works */
+    .how {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 64px 24px;
+      text-align: center;
+    }
+    .how h2 {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 40px;
+    }
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      text-align: left;
+    }
+    .step {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .step-num {
+      background: #FF7326;
+      color: #000;
+      font-size: 15px;
+      font-weight: 800;
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .step-text h3 {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .step-text p {
+      font-size: 14px;
+      color: #888;
+      line-height: 1.5;
+    }
 
-        /* NAV */
-        nav {
-            padding: 24px 0;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid var(--border);
-        }
-        .logo {
-            font-family: 'Space Mono', monospace;
-            font-weight: 700;
-            font-size: 1.25rem;
-            letter-spacing: -0.02em;
-            color: var(--text);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .logo-dot {
-            width: 10px;
-            height: 10px;
-            background: var(--accent);
-            border-radius: 50%;
-            display: inline-block;
-            box-shadow: 0 0 12px var(--accent-glow-strong);
-        }
-        .nav-tag {
-            font-size: 0.7rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--accent);
-            border: 1px solid rgba(255, 115, 38, 0.3);
-            padding: 4px 12px;
-            border-radius: 100px;
-            background: var(--accent-glow);
-        }
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 40px 24px;
+      border-top: 1px solid #1a1a1a;
+      color: #444;
+      font-size: 13px;
+    }
+    .footer a {
+      color: #666;
+      text-decoration: none;
+      margin: 0 12px;
+    }
+    .footer a:hover { color: #FF7326; }
+    .footer-links { margin-bottom: 12px; }
 
-        /* HERO */
-        .hero {
-            padding: 100px 0 80px;
-            text-align: center;
-        }
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--accent);
-            border: 1px solid rgba(255, 115, 38, 0.25);
-            padding: 8px 20px;
-            border-radius: 100px;
-            background: var(--accent-glow);
-            margin-bottom: 32px;
-            animation: fadeInUp 0.6s ease-out both;
-        }
-        .hero-badge::before {
-            content: '';
-            width: 6px;
-            height: 6px;
-            background: var(--accent);
-            border-radius: 50%;
-            animation: pulse 2s ease-in-out infinite;
-        }
-        .hero h1 {
-            font-size: clamp(2.8rem, 7vw, 5rem);
-            font-weight: 800;
-            line-height: 1.05;
-            letter-spacing: -0.03em;
-            margin-bottom: 24px;
-            animation: fadeInUp 0.6s ease-out 0.1s both;
-        }
-        .hero h1 .accent {
-            color: var(--accent);
-            position: relative;
-        }
-        .hero p {
-            font-size: 1.15rem;
-            color: var(--text-muted);
-            max-width: 520px;
-            margin: 0 auto 48px;
-            line-height: 1.7;
-            animation: fadeInUp 0.6s ease-out 0.2s both;
-        }
-
-        /* CTA Button */
-        .cta-group {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 16px;
-            flex-wrap: wrap;
-            animation: fadeInUp 0.6s ease-out 0.3s both;
-        }
-        .btn-primary {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 16px 32px;
-            background: var(--accent);
-            color: #000;
-            font-weight: 700;
-            font-size: 0.95rem;
-            border: none;
-            border-radius: 14px;
-            cursor: pointer;
-            text-decoration: none;
-            transition: all 0.2s ease;
-            box-shadow: 0 0 30px var(--accent-glow-strong);
-        }
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 0 50px var(--accent-glow-strong);
-        }
-        .btn-primary svg {
-            width: 20px;
-            height: 20px;
-        }
-        .btn-secondary {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 16px 28px;
-            background: transparent;
-            color: var(--text);
-            font-weight: 600;
-            font-size: 0.95rem;
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            cursor: pointer;
-            text-decoration: none;
-            transition: all 0.2s ease;
-        }
-        .btn-secondary:hover {
-            border-color: var(--border-hover);
-            background: rgba(255,255,255,0.03);
-        }
-
-        /* HOW IT WORKS */
-        .section {
-            padding: 80px 0;
-        }
-        .section-label {
-            font-family: 'Space Mono', monospace;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: var(--accent);
-            margin-bottom: 16px;
-        }
-        .section-title {
-            font-size: clamp(1.8rem, 4vw, 2.5rem);
-            font-weight: 800;
-            letter-spacing: -0.02em;
-            margin-bottom: 56px;
-            line-height: 1.15;
-        }
-
-        .steps-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-            gap: 16px;
-        }
-        .step-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 32px 28px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        .step-card:hover {
-            border-color: var(--border-hover);
-            transform: translateY(-4px);
-        }
-        .step-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--accent-glow-strong), transparent);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        .step-card:hover::before {
-            opacity: 1;
-        }
-        .step-number {
-            font-family: 'Space Mono', monospace;
-            font-size: 0.7rem;
-            font-weight: 700;
-            color: var(--accent);
-            letter-spacing: 0.1em;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .step-number::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: var(--border);
-        }
-        .step-icon {
-            font-size: 2rem;
-            margin-bottom: 16px;
-            display: block;
-        }
-        .step-card h3 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            letter-spacing: -0.01em;
-        }
-        .step-card p {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            line-height: 1.6;
-        }
-
-        /* FEATURES */
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 16px;
-        }
-        .feature-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 28px 24px;
-            display: flex;
-            align-items: flex-start;
-            gap: 16px;
-            transition: all 0.3s ease;
-        }
-        .feature-card:hover {
-            border-color: var(--border-hover);
-        }
-        .feature-icon {
-            width: 44px;
-            height: 44px;
-            min-width: 44px;
-            border-radius: 12px;
-            background: var(--accent-glow);
-            border: 1px solid rgba(255, 115, 38, 0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-        }
-        .feature-card h4 {
-            font-size: 0.95rem;
-            font-weight: 700;
-            margin-bottom: 6px;
-        }
-        .feature-card p {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            line-height: 1.55;
-        }
-
-        /* STAKES BANNER */
-        .stakes-banner {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 24px;
-            padding: 48px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        .stakes-banner::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle at center, var(--accent-glow) 0%, transparent 50%);
-            opacity: 0.4;
-        }
-        .stakes-banner .content {
-            position: relative;
-            z-index: 1;
-        }
-        .stakes-amounts {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            margin-bottom: 24px;
-            flex-wrap: wrap;
-        }
-        .stake-chip {
-            font-family: 'Space Mono', monospace;
-            font-weight: 700;
-            font-size: 1.1rem;
-            color: var(--accent);
-            border: 1px solid rgba(255, 115, 38, 0.3);
-            background: rgba(255, 115, 38, 0.08);
-            padding: 8px 20px;
-            border-radius: 100px;
-        }
-        .stakes-banner h2 {
-            font-size: clamp(1.5rem, 3.5vw, 2.2rem);
-            font-weight: 800;
-            letter-spacing: -0.02em;
-            margin-bottom: 12px;
-        }
-        .stakes-banner p {
-            color: var(--text-muted);
-            font-size: 1rem;
-            max-width: 460px;
-            margin: 0 auto;
-        }
-
-        /* COMING SOON / APP STORE */
-        .coming-soon {
-            text-align: center;
-            padding: 80px 0;
-        }
-        .coming-soon h2 {
-            font-size: clamp(1.8rem, 4vw, 2.5rem);
-            font-weight: 800;
-            letter-spacing: -0.02em;
-            margin-bottom: 16px;
-        }
-        .coming-soon p {
-            color: var(--text-muted);
-            font-size: 1.05rem;
-            margin-bottom: 40px;
-        }
-        .app-store-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 14px;
-            background: #fff;
-            color: #000;
-            padding: 16px 32px;
-            border-radius: 16px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 1rem;
-            transition: all 0.2s ease;
-            border: none;
-            cursor: pointer;
-        }
-        .app-store-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(255,255,255,0.1);
-        }
-        .app-store-btn svg {
-            width: 28px;
-            height: 28px;
-        }
-        .app-store-label {
-            text-align: left;
-        }
-        .app-store-label span {
-            display: block;
-            font-size: 0.7rem;
-            font-weight: 500;
-            opacity: 0.6;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        /* CONTACT */
-        .contact-section {
-            text-align: center;
-            padding-bottom: 80px;
-        }
-        .contact-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 40px;
-            display: inline-block;
-        }
-        .contact-card p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            margin-bottom: 12px;
-        }
-        .contact-card a {
-            color: var(--accent);
-            font-weight: 600;
-            font-size: 1.05rem;
-            text-decoration: none;
-            transition: opacity 0.2s;
-        }
-        .contact-card a:hover {
-            opacity: 0.8;
-        }
-
-        /* FOOTER */
-        footer {
-            border-top: 1px solid var(--border);
-            padding: 32px 0;
-        }
-        .footer-inner {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 16px;
-        }
-        .footer-left {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-        }
-        .footer-links {
-            display: flex;
-            align-items: center;
-            gap: 24px;
-        }
-        .footer-links a {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-        .footer-links a:hover {
-            color: var(--text);
-        }
-
-        /* ANIMATIONS */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(24px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.4; }
-        }
-
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* RESPONSIVE */
-        @media (max-width: 640px) {
-            .hero { padding: 64px 0 56px; }
-            .section { padding: 56px 0; }
-            .steps-grid { grid-template-columns: 1fr; }
-            .features-grid { grid-template-columns: 1fr; }
-            .stakes-banner { padding: 32px 24px; }
-            .coming-soon { padding: 56px 0; }
-            nav { padding: 16px 0; }
-            .footer-inner {
-                flex-direction: column;
-                text-align: center;
-            }
-        }
-    </style>
+    /* Responsive */
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 32px; }
+      .tagline { font-size: 16px; }
+      .stats { gap: 24px; }
+      .stat-number { font-size: 28px; }
+    }
+  </style>
 </head>
 <body>
 
-<div class="glow-orb glow-orb-1"></div>
-<div class="glow-orb glow-orb-2"></div>
+  <!-- Hero -->
+  <section class="hero">
+    <img src="/logo.png" alt="Challengrs Logo" class="logo">
+    <h1><span class="accent">Challengrs</span></h1>
+    <p class="tagline">
+      Stake real money on personal challenges. Upload daily proof. Win the pot — or lose your stake.
+    </p>
+    <div class="cta-row">
+      <a class="btn" href="https://apps.apple.com/app/challengrs/id6760044496">Download the App</a>
+      <a class="btn-outline" href="https://testflight.apple.com/join/PLACEHOLDER">Join TestFlight</a>
+    </div>
+  </section>
 
-<div class="container">
-    <!-- NAV -->
-    <nav>
-        <a href="#" class="logo">
-            <span class="logo-dot"></span>
-            CHALLENGRS
-        </a>
-        <span class="nav-tag">Coming Soon</span>
-    </nav>
+  <!-- Live Stats -->
+  <section class="stats" id="stats">
+    <div class="stat">
+      <div class="stat-number" id="stat-challenges">—</div>
+      <div class="stat-label">Challenges</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number" id="stat-users">—</div>
+      <div class="stat-label">Users</div>
+    </div>
+    <div class="stat">
+      <div class="stat-number" id="stat-money">—</div>
+      <div class="stat-label">Money Staked</div>
+    </div>
+  </section>
 
-    <!-- HERO -->
-    <section class="hero">
-        <div class="hero-badge">
-            <span>iOS App</span>
+  <!-- How It Works -->
+  <section class="how">
+    <h2>How It Works</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text">
+          <h3>Create a Challenge</h3>
+          <p>Set a goal, pick a stake amount, and invite your friends — or go public and challenge anyone.</p>
         </div>
-        <h1>
-            Stake money.<br>
-            Prove it daily.<br>
-            <span class="accent">Win the pot.</span>
-        </h1>
-        <p>
-            Challenge your friends, put real money on the line, and hold each other accountable with daily photo proof. Winners take all.
-        </p>
-        <div class="cta-group">
-            <a href="#coming-soon" class="btn-primary">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
-                Get Early Access
-            </a>
-            <a href="#how-it-works" class="btn-secondary">
-                How it works ↓
-            </a>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text">
+          <h3>Prove Yourself Daily</h3>
+          <p>Upload timestamped photo proof on your schedule. Miss a day? Request a redo — if your group approves it.</p>
         </div>
-    </section>
-
-    <!-- HOW IT WORKS -->
-    <section class="section reveal" id="how-it-works">
-        <div class="section-label">How it works</div>
-        <h2 class="section-title">Four steps to real<br>accountability.</h2>
-        <div class="steps-grid">
-            <div class="step-card">
-                <div class="step-number">01</div>
-                <span class="step-icon">🎯</span>
-                <h3>Create a challenge</h3>
-                <p>Set a goal — fitness, habits, learning, anything. Invite friends and choose your stakes ($1–$20).</p>
-            </div>
-            <div class="step-card">
-                <div class="step-number">02</div>
-                <span class="step-icon">💰</span>
-                <h3>Stake the pot</h3>
-                <p>Everyone puts real money in. The shared pot grows with each participant — skin in the game changes everything.</p>
-            </div>
-            <div class="step-card">
-                <div class="step-number">03</div>
-                <span class="step-icon">📸</span>
-                <h3>Prove it daily</h3>
-                <p>Upload timestamped, geotagged photos as proof you did the work. No faking it — your friends are watching.</p>
-            </div>
-            <div class="step-card">
-                <div class="step-number">04</div>
-                <span class="step-icon">🏆</span>
-                <h3>Winners take all</h3>
-                <p>Complete the challenge? You split the pot from those who didn't. Miss a day? You can request a redo — your group votes.</p>
-            </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text">
+          <h3>Win the Pot</h3>
+          <p>Complete the challenge and split the pot with other winners. Fail, and your stake goes to those who didn't.</p>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- FEATURES -->
-    <section class="section reveal">
-        <div class="section-label">Built for accountability</div>
-        <h2 class="section-title">Not just another<br>habit tracker.</h2>
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">📍</div>
-                <div>
-                    <h4>Geotagged proof</h4>
-                    <p>Photos are timestamped and location-verified. No cheating, no screenshots from last week.</p>
-                </div>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🗳️</div>
-                <div>
-                    <h4>Community voting</h4>
-                    <p>Miss a day? Request a redo. Your group decides if your excuse holds up.</p>
-                </div>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🔒</div>
-                <div>
-                    <h4>Secure payments</h4>
-                    <p>Stakes and payouts handled through Stripe. Your money is safe until the challenge ends.</p>
-                </div>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">👥</div>
-                <div>
-                    <h4>Social challenges</h4>
-                    <p>Invite friends directly. See their progress, cheer them on, or watch them lose their stake.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-links">
+      <a href="/Terms.html">Terms of Service</a>
+      <a href="/privacy.html">Privacy Policy</a>
+      <a href="mailto:support@challengrs.app">Contact</a>
+    </div>
+    <p>&copy; 2026 Challengrs. All rights reserved.</p>
+  </footer>
 
-    <!-- STAKES BANNER -->
-    <section class="section reveal">
-        <div class="stakes-banner">
-            <div class="content">
-                <div class="stakes-amounts">
-                    <span class="stake-chip">$1</span>
-                    <span class="stake-chip">$5</span>
-                    <span class="stake-chip">$10</span>
-                    <span class="stake-chip">$20</span>
-                </div>
-                <h2>Money makes it real.</h2>
-                <p>Free apps get abandoned. When your money is on the line, you show up. Every. Single. Day.</p>
-            </div>
-        </div>
-    </section>
+  <script>
+    // Fetch live stats from Supabase Edge Function
+    const STATS_URL = 'https://wfpplusxrsfjazuybpqv.supabase.co/functions/v1/get-stats';
 
-    <!-- COMING SOON -->
-    <section class="coming-soon reveal" id="coming-soon">
-        <div class="section-label">Launching soon</div>
-        <h2>Coming soon to the App Store.</h2>
-        <p>Be the first to challenge your friends when we launch.</p>
-        <div class="app-store-btn">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-            <div class="app-store-label">
-                <span>Coming soon on the</span>
-                App Store
-            </div>
-        </div>
-    </section>
+    async function loadStats() {
+      try {
+        const res = await fetch(STATS_URL);
+        if (!res.ok) return;
+        const data = await res.json();
 
-    <!-- CONTACT -->
-    <section class="contact-section reveal">
-        <div class="contact-card">
-            <p>Questions, partnerships, or press?</p>
-            <a href="mailto:hello@challengrs.app">hello@challengrs.app</a>
-        </div>
-    </section>
+        document.getElementById('stat-challenges').textContent =
+          (data.totalChallenges || 0).toLocaleString();
+        document.getElementById('stat-users').textContent =
+          (data.totalUsers || 0).toLocaleString();
+        document.getElementById('stat-money').textContent =
+          '$' + (data.totalMoneyStaked || 0).toLocaleString(undefined, {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0,
+          });
+      } catch (e) {
+        // Silently fail — dashes stay as placeholder
+      }
+    }
 
-    <!-- FOOTER -->
-    <footer>
-        <div class="footer-inner">
-            <div class="footer-left">
-                &copy; 2025 Challengrs. All rights reserved.
-            </div>
-            <div class="footer-links">
-                <a href="terms.html">Terms of Service</a>
-                <a href="privacy.html">Privacy Policy</a>
-            </div>
-        </div>
-    </footer>
-</div>
-
-<script>
-    // Scroll reveal
-    const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry, i) => {
-            if (entry.isIntersecting) {
-                setTimeout(() => {
-                    entry.target.classList.add('visible');
-                }, i * 80);
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.1 });
-    reveals.forEach(el => observer.observe(el));
-</script>
+    loadStats();
+  </script>
 </body>
 </html>
+
